@@ -119,13 +119,21 @@
 
   <h1>ورقة بيانات ملاحظة السلوك</h1>
 
-  <!-- بداية النموذج باستخدام خدمة Formsubmit -->
+  <!-- 
+       استخدام خدمة FormSubmit
+       ملاحظات:
+       - تأكد من تفعيل بريدك في FormSubmit حتى يصلك محتوى النموذج.
+       - تم استخدام method="POST" مع عدم تحديد enctype (سيكون افتراضيًا application/x-www-form-urlencoded).
+  -->
   <form id="behaviorForm"
-        method="post"
-        enctype="text/plain"
-        onsubmit="submitForm(event)"
-        action="https://formsubmit.co/info@ynmocenter.com">
+        method="POST"
+        action="https://formsubmit.co/info@ynmocenter.com"
+        onsubmit="submitForm(event)">
 
+    <!-- يمكنك ضبط عنوان الرسالة أو إعدادات أخرى عبر حقول خفية خاصة بـ FormSubmit -->
+    <input type="hidden" name="_subject" value="نموذج ملاحظة السلوك - جديد">
+    <input type="hidden" name="_captcha" value="false">
+    
     <!-- الجدول الرئيسي: صفان × أربعة أعمدة -->
     <table>
       <thead>
@@ -159,7 +167,6 @@
             <span class="category-title">الهروب</span>
             <label><input type="checkbox" class="escape" name="A_instructions_top"> تم إعطاء تعليمات النشاط</label>
             <label><input type="checkbox" class="escape" name="A_change_activity_top"> الانتقال لنشاط / تغيير نشاط</label>
-            <!-- نضيف فئة "request" لخانة طلب الانتباه -->
             <label><input type="checkbox" class="escape request" name="A_request_attention_top"> طلب الانتباه</label>
             <label><input type="checkbox" class="escape" name="A_present_tool_top"> تم تقديم أداة</label>
             
@@ -282,7 +289,6 @@
     </label>
 
     <!-- حقول مخفية لحساب عدد الاختيارات -->
-    <!-- سيتم حساب عدد "الهروب" (باستثناء خانة طلب الانتباه) وعدد "طلب الانتباه" -->
     <input type="hidden" name="escapeCount" id="escapeCount" value="0">
     <input type="hidden" name="requestCount" id="requestCount" value="0">
 
@@ -297,13 +303,19 @@
 
   <script>
     function submitForm(event) {
+      // منع الإرسال الافتراضي مؤقتًا لحساب القيم
       event.preventDefault();
-      // حساب عدد الخانات في فئة الهروب (تجاهل الخانات التي تحمل فئة "request")
+
+      // حساب عدد "الهروب" (الخانات ذات الفئة escape) مع استثناء "طلب الانتباه" (request)
       const escapeCount = document.querySelectorAll('.escape:not(.request):checked').length;
-      // حساب عدد الخانات في فئة طلب الانتباه (الخانات التي تحمل فئة "request")
+      // حساب عدد "طلب الانتباه" (الخانات ذات الفئة request)
       const requestCount = document.querySelectorAll('.request:checked').length;
+
+      // تخزين النتائج في الحقول المخفية
       document.getElementById('escapeCount').value = escapeCount;
       document.getElementById('requestCount').value = requestCount;
+
+      // إرسال النموذج بعد تحديث الحقول
       event.target.submit();
     }
   </script>
