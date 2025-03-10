@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>ورقة بيانات ملاحظة السلوك</title>
+  <!-- استيراد خط Tajawal العربي -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 20px;
+      font-family: 'Tajawal', sans-serif;
+      direction: rtl;
+      background-color: #F9F8F3; /* خلفية فاتحة */
+      color: #18293C; /* لون داكن للنص */
+    }
+    /* تنسيق مكان الشعار */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo-container img {
+      max-width: 250px; /* يمكن تعديل الحجم حسب الحاجة */
+      width: 100%;
+      height: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #18293C;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    thead th {
+      background-color: #009688; /* أخضر داكن */
+      color: #fff;
+      padding: 10px;
+      border: 2px solid #ccc;
+      font-weight: 700;
+      text-align: center;
+    }
+    tbody td {
+      vertical-align: top;
+      border: 2px solid #ccc;
+      padding: 10px;
+      background-color: #FFFFFF;
+      width: 25%;
+    }
+    .category-title {
+      font-weight: 700;
+      color: #009688;
+      margin: 8px 0 5px 0;
+      display: block;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.95em;
+    }
+    input[type="checkbox"] {
+      margin-left: 5px;
+      transform: scale(1.1);
+      cursor: pointer;
+    }
+    input[type="time"],
+    input[type="date"],
+    input[type="text"] {
+      display: block;
+      margin-bottom: 8px;
+      padding: 4px;
+      width: 90%;
+      max-width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Tajawal', sans-serif;
+    }
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 100px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: 'Tajawal', sans-serif;
+      padding: 5px;
+      margin-top: 5px;
+    }
+    .btn-submit {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      background-color: #FAC195; /* برتقالي فاتح */
+      color: #18293C;
+      border: none;
+      border-radius: 4px;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-submit:hover {
+      background-color: #F8A97C;
+    }
+    .footer-info {
+      text-align: center;
+      margin-top: 30px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- مكان الشعار -->
+  <div class="logo-container">
+    <img src="logo.png" alt="شعار المركز">
+  </div>
+
+  <h1>ورقة بيانات ملاحظة السلوك</h1>
+
+  <!-- بداية النموذج مع إرسال البيانات عبر mailto -->
+  <form id="behaviorForm"
+        method="post"
+        enctype="text/plain"
+        onsubmit="submitForm(event)"
+        action="mailto:info@ynmocenter.com">
+
+    <!-- الجدول الرئيسي: صفان × أربعة أعمدة -->
+    <table>
+      <thead>
+        <tr>
+          <th>الجلسة</th>
+          <th>(A) السوابق</th>
+          <th>(B) وصف السلوك</th>
+          <th>(C) التوابع</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- الصف الأول: الجزء العلوي -->
+        <tr>
+          <!-- عمود الجلسة -->
+          <td>
+            <label>الوقت:
+              <input type="time" name="time_top">
+            </label>
+            <label>التاريخ:
+              <input type="date" name="date_top">
+            </label>
+            <label>المشاركون: (الأقران / المختص / الأسرة)
+              <input type="text" name="participants_top">
+            </label>
+          </td>
+          <!-- عمود (A) السوابق - الجزء العلوي -->
+          <td>
+            <span class="category-title">الوصول للأشياء الملموسة</span>
+            <label><input type="checkbox" class="material" name="A_removed_top"> تمت إزالة العنصر</label>
+            
+            <span class="category-title">الهروب</span>
+            <label><input type="checkbox" class="escape" name="A_instructions_top"> تم إعطاء تعليمات النشاط</label>
+            <label><input type="checkbox" class="escape" name="A_change_activity_top"> الانتقال لنشاط / تغيير نشاط</label>
+            <label><input type="checkbox" class="escape" name="A_request_attention_top"> طلب الانتباه</label>
+            <label><input type="checkbox" class="escape" name="A_present_tool_top"> تم تقديم أداة</label>
+            
+            <span class="category-title">الوصول للاهتمام</span>
+            <label><input type="checkbox" class="attention" name="A_remove_verbal_top"> إزالة الانتباه اللفظي</label>
+            <label><input type="checkbox" class="attention" name="A_remove_physical_top"> إزالة الانتباه البدني</label>
+            <label><input type="checkbox" class="attention" name="A_remove_peer_top"> إزالة انتباه الأقران</label>
+            <label><input type="checkbox" class="attention" name="A_remove_visual_top"> إزالة التواصل البصري</label>
+            
+            <span class="category-title">تلقائي / حسي / آخر</span>
+            <label><input type="checkbox" class="auto" name="A_no_material_top"> لم يتم إضافة أو إزالة أدوات ملموسة</label>
+            <label><input type="checkbox" class="auto" name="A_no_attention_top"> لم يتم إضافة أو إزالة انتباه</label>
+            <label><input type="checkbox" class="auto" name="A_no_activity_top"> لم يتم إعطاء تعليمات أو الانخراط في نشاط</label>
+            <label>أخرى: _________________________________</label>
+            <label>_________________________________</label>
+          </td>
+          <!-- عمود (B) وصف السلوك - الجزء العلوي (فارغ) -->
+          <td>
+            <textarea name="B_description_top" placeholder="وصف السلوك (فارغ)"></textarea>
+          </td>
+          <!-- عمود (C) التوابع - الجزء العلوي -->
+          <td>
+            <span class="category-title">الوصول للأشياء الملموسة</span>
+            <label><input type="checkbox" class="material" name="C_returned_top"> تم إعادة العنصر الذي تم ازالته</label>
+            <label><input type="checkbox" class="material" name="C_new_top"> تم عرض عنصر جديد</label>
+            
+            <span class="category-title">الهروب</span>
+            <label><input type="checkbox" class="escape" name="C_remove_instructions_top"> إبعاد تعليمات النشاط</label>
+            <label><input type="checkbox" class="escape" name="C_no_transition_top"> لم يعد الانتقال / النشاط مطلوبًا</label>
+            <label><input type="checkbox" class="escape" name="C_remove_attention_top"> تمت إزالة الانتباه</label>
+            <label><input type="checkbox" class="escape" name="C_remove_tool_top"> تمت إزالة الأداة</label>
+            
+            <span class="category-title">الوصول للاهتمام</span>
+            <label><input type="checkbox" class="attention" name="C_get_verbal_top"> الحصول على لانتباه اللفظي</label>
+            <label><input type="checkbox" class="attention" name="C_get_physical_top"> الحصول على الانتباه البدني</label>
+            <label><input type="checkbox" class="attention" name="C_get_peer_top"> الحصول على انتباه الأقران</label>
+            <label><input type="checkbox" class="attention" name="C_get_visual_top"> الحصول على التواصل البصري</label>
+            
+            <span class="category-title">تلقائي / حسي / آخر</span>
+            <label><input type="checkbox" class="auto" name="C_no_material_top"> لم يتم إضافة أو إزالة أدوات ملموسة</label>
+            <label><input type="checkbox" class="auto" name="C_no_attention_top"> لم يتم إضافة أو إزالة انتباه</label>
+            <label><input type="checkbox" class="auto" name="C_no_activity_top"> لم يتم إعطاء تعليمات أو الانخراط في نشاط</label>
+            <label>أخرى: ــــــــــــــــــــــــــــــــــــــــ</label>
+            <label>ـــــــــــــــــــــــــــــــــــــــــــــــــــ</label>
+          </td>
+        </tr>
+        <!-- الصف الثاني: الجزء السفلي -->
+        <tr>
+          <!-- عمود الجلسة -->
+          <td>
+            <label>الوقت:
+              <input type="time" name="time_bottom">
+            </label>
+            <label>التاريخ:
+              <input type="date" name="date_bottom">
+            </label>
+            <label>المشاركون: (الأقران / المختص / الأسرة)
+              <input type="text" name="participants_bottom">
+            </label>
+          </td>
+          <!-- عمود (A) السوابق - الجزء السفلي -->
+          <td>
+            <span class="category-title">الوصول للأشياء الملموسة</span>
+            <label><input type="checkbox" class="material" name="A_removed_bottom"> تمت إزالة العنصر</label>
+            
+            <span class="category-title">الهروب</span>
+            <label><input type="checkbox" class="escape" name="A_instructions_bottom"> تم إعطاء تعليمات النشاط</label>
+            <label><input type="checkbox" class="escape" name="A_change_activity_bottom"> الانتقال لنشاط / تغيير نشاط</label>
+            <label><input type="checkbox" class="escape" name="A_request_attention_bottom"> طلب الانتباه</label>
+            <label><input type="checkbox" class="escape" name="A_present_tool_bottom"> تم تقديم أداة</label>
+            
+            <span class="category-title">الوصول للاهتمام</span>
+            <label><input type="checkbox" class="attention" name="A_remove_verbal_bottom"> إزالة الانتباه اللفظي</label>
+            <label><input type="checkbox" class="attention" name="A_remove_physical_bottom"> إزالة الانتباه البدني</label>
+            <label><input type="checkbox" class="attention" name="A_remove_peer_bottom"> إزالة انتباه الأقران</label>
+            <label><input type="checkbox" class="attention" name="A_remove_visual_bottom"> إزالة التواصل البصري</label>
+            
+            <span class="category-title">تلقائي / حسي / آخر</span>
+            <label><input type="checkbox" class="auto" name="A_no_material_bottom"> لم يتم إضافة أو إزالة أدوات ملموسة</label>
+            <label><input type="checkbox" class="auto" name="A_no_attention_bottom"> لم يتم إضافة أو إزالة انتباه</label>
+            <label><input type="checkbox" class="auto" name="A_no_activity_bottom"> لم يتم إعطاء تعليمات أو الانخراط في نشاط</label>
+            <label>أخرى: __________________________________________</label>
+          </td>
+          <!-- عمود (B) وصف السلوك - الجزء السفلي (فارغ) -->
+          <td>
+            <textarea name="B_description_bottom" placeholder="وصف السلوك (فارغ)"></textarea>
+          </td>
+          <!-- عمود (C) التوابع - الجزء السفلي -->
+          <td>
+            <span class="category-title">الوصول للأشياء الملموسة</span>
+            <label><input type="checkbox" class="material" name="C_returned_bottom"> تم إعادة العنصر الذي تم ازالته</label>
+            <label><input type="checkbox" class="material" name="C_new_bottom"> تم عرض عنصر جديد</label>
+            
+            <span class="category-title">الهروب</span>
+            <label><input type="checkbox" class="escape" name="C_remove_instructions_bottom"> إبعاد تعليمات النشاط</label>
+            <label><input type="checkbox" class="escape" name="C_no_transition_bottom"> لم يعد الانتقال / النشاط مطلوبًا</label>
+            <label><input type="checkbox" class="escape" name="C_remove_attention_bottom"> تمت إزالة الانتباه</label>
+            <label><input type="checkbox" class="escape" name="C_remove_tool_bottom"> تمت إزالة الأداة</label>
+            
+            <span class="category-title">الوصول للاهتمام</span>
+            <label><input type="checkbox" class="attention" name="C_get_verbal_bottom"> الحصول على لانتباه اللفظي</label>
+            <label><input type="checkbox" class="attention" name="C_get_physical_bottom"> الحصول على الانتباه البدني</label>
+            <label><input type="checkbox" class="attention" name="C_get_peer_bottom"> الحصول على انتباه الأقران</label>
+            <label><input type="checkbox" class="attention" name="C_get_visual_bottom"> الحصول على التواصل البصري</label>
+            
+            <span class="category-title">تلقائي / حسي / آخر</span>
+            <label><input type="checkbox" class="auto" name="C_no_material_bottom"> لم يتم إضافة أو إزالة أدوات ملموسة</label>
+            <label><input type="checkbox" class="auto" name="C_no_attention_bottom"> لم يتم إضافة أو إزالة انتباه</label>
+            <label><input type="checkbox" class="auto" name="C_no_activity_bottom"> لم يتم إعطاء تعليمات أو الانخراط في نشاط</label>
+            <label>أخرى: ــــــــــــــــــــــــــــــــــــــــ</label>
+            <label>ـــــــــــــــــــــــــــــــــــــــــــــــــــ</label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ملاحظات إضافية -->
+    <label>ملاحظات إضافية:
+      <textarea name="additional_notes" placeholder="أدخل الملاحظات الإضافية هنا..."></textarea>
+    </label>
+
+    <!-- الحقول المخفية لحساب عدد الاختيارات -->
+    <input type="hidden" name="escapeCount" id="escapeCount" value="0">
+    <input type="hidden" name="attentionCount" id="attentionCount" value="0">
+    <input type="hidden" name="materialCount" id="materialCount" value="0">
+    <input type="hidden" name="autoCount" id="autoCount" value="0">
+
+    <button type="submit" class="btn-submit">إرسال النموذج</button>
+  </form>
+
+  <div class="footer-info">
+    <p>رقم الاتصال: 0598058202</p>
+    <p>البريد الإلكتروني: info@ynmocenter.com</p>
+    <p>الموقع: المدينة المنورة، شوران – طريق قباء</p>
+  </div>
+
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      const checkboxes_escape = document.querySelectorAll('.escape:checked');
+      const checkboxes_attention = document.querySelectorAll('.attention:checked');
+      const checkboxes_material = document.querySelectorAll('.material:checked');
+      const checkboxes_auto = document.querySelectorAll('.auto:checked');
+
+      document.getElementById('escapeCount').value = checkboxes_escape.length;
+      document.getElementById('attentionCount').value = checkboxes_attention.length;
+      document.getElementById('materialCount').value = checkboxes_material.length;
+      document.getElementById('autoCount').value = checkboxes_auto.length;
+
+      event.target.submit();
+    }
+  </script>
+
+</body>
+</html>
