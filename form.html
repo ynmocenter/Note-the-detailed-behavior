@@ -13,7 +13,7 @@
       background-color: #F9F8F3; /* خلفية فاتحة */
       color: #18293C; /* لون داكن للنص */
     }
-    /* تنسيق مكان الشعار */
+    /* مكان الشعار */
     .logo-container {
       text-align: center;
       margin-bottom: 20px;
@@ -112,19 +112,19 @@
 </head>
 <body>
 
-  <!-- مكان الشعار -->
+  <!-- مكان شعار المركز -->
   <div class="logo-container">
     <img src="logo.png" alt="شعار المركز">
   </div>
 
   <h1>ورقة بيانات ملاحظة السلوك</h1>
 
-  <!-- بداية النموذج مع إرسال البيانات عبر mailto -->
+  <!-- بداية النموذج باستخدام خدمة Formsubmit -->
   <form id="behaviorForm"
         method="post"
         enctype="text/plain"
         onsubmit="submitForm(event)"
-        action="mailto:info@ynmocenter.com">
+        action="https://formsubmit.co/info@ynmocenter.com">
 
     <!-- الجدول الرئيسي: صفان × أربعة أعمدة -->
     <table>
@@ -159,7 +159,8 @@
             <span class="category-title">الهروب</span>
             <label><input type="checkbox" class="escape" name="A_instructions_top"> تم إعطاء تعليمات النشاط</label>
             <label><input type="checkbox" class="escape" name="A_change_activity_top"> الانتقال لنشاط / تغيير نشاط</label>
-            <label><input type="checkbox" class="escape" name="A_request_attention_top"> طلب الانتباه</label>
+            <!-- نضيف فئة "request" لخانة طلب الانتباه -->
+            <label><input type="checkbox" class="escape request" name="A_request_attention_top"> طلب الانتباه</label>
             <label><input type="checkbox" class="escape" name="A_present_tool_top"> تم تقديم أداة</label>
             
             <span class="category-title">الوصول للاهتمام</span>
@@ -175,7 +176,7 @@
             <label>أخرى: _________________________________</label>
             <label>_________________________________</label>
           </td>
-          <!-- عمود (B) وصف السلوك - الجزء العلوي (فارغ) -->
+          <!-- عمود (B) وصف السلوك - الجزء العلوي (مُترك فارغًا) -->
           <td>
             <textarea name="B_description_top" placeholder="وصف السلوك (فارغ)"></textarea>
           </td>
@@ -227,7 +228,7 @@
             <span class="category-title">الهروب</span>
             <label><input type="checkbox" class="escape" name="A_instructions_bottom"> تم إعطاء تعليمات النشاط</label>
             <label><input type="checkbox" class="escape" name="A_change_activity_bottom"> الانتقال لنشاط / تغيير نشاط</label>
-            <label><input type="checkbox" class="escape" name="A_request_attention_bottom"> طلب الانتباه</label>
+            <label><input type="checkbox" class="escape request" name="A_request_attention_bottom"> طلب الانتباه</label>
             <label><input type="checkbox" class="escape" name="A_present_tool_bottom"> تم تقديم أداة</label>
             
             <span class="category-title">الوصول للاهتمام</span>
@@ -280,11 +281,10 @@
       <textarea name="additional_notes" placeholder="أدخل الملاحظات الإضافية هنا..."></textarea>
     </label>
 
-    <!-- الحقول المخفية لحساب عدد الاختيارات -->
+    <!-- حقول مخفية لحساب عدد الاختيارات -->
+    <!-- سيتم حساب عدد "الهروب" (باستثناء خانة طلب الانتباه) وعدد "طلب الانتباه" -->
     <input type="hidden" name="escapeCount" id="escapeCount" value="0">
-    <input type="hidden" name="attentionCount" id="attentionCount" value="0">
-    <input type="hidden" name="materialCount" id="materialCount" value="0">
-    <input type="hidden" name="autoCount" id="autoCount" value="0">
+    <input type="hidden" name="requestCount" id="requestCount" value="0">
 
     <button type="submit" class="btn-submit">إرسال النموذج</button>
   </form>
@@ -298,16 +298,12 @@
   <script>
     function submitForm(event) {
       event.preventDefault();
-      const checkboxes_escape = document.querySelectorAll('.escape:checked');
-      const checkboxes_attention = document.querySelectorAll('.attention:checked');
-      const checkboxes_material = document.querySelectorAll('.material:checked');
-      const checkboxes_auto = document.querySelectorAll('.auto:checked');
-
-      document.getElementById('escapeCount').value = checkboxes_escape.length;
-      document.getElementById('attentionCount').value = checkboxes_attention.length;
-      document.getElementById('materialCount').value = checkboxes_material.length;
-      document.getElementById('autoCount').value = checkboxes_auto.length;
-
+      // حساب عدد الخانات في فئة الهروب (تجاهل الخانات التي تحمل فئة "request")
+      const escapeCount = document.querySelectorAll('.escape:not(.request):checked').length;
+      // حساب عدد الخانات في فئة طلب الانتباه (الخانات التي تحمل فئة "request")
+      const requestCount = document.querySelectorAll('.request:checked').length;
+      document.getElementById('escapeCount').value = escapeCount;
+      document.getElementById('requestCount').value = requestCount;
       event.target.submit();
     }
   </script>
